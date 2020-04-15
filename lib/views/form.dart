@@ -1,3 +1,4 @@
+import 'package:covidapp/controllers/routes.dart';
 import 'package:flutter/material.dart';
 import '../models/user.dart';
 
@@ -13,7 +14,7 @@ class _HomeMaterialState extends State<HomeMaterial> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Profile')),
+        appBar: AppBar(title: Text('Login')),
         body: Container(
             padding:
             const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
@@ -25,25 +26,25 @@ class _HomeMaterialState extends State<HomeMaterial> {
                         children: [
                           TextFormField(
                             decoration:
-                            InputDecoration(labelText: 'First name'),
+                            InputDecoration(labelText: 'CPF'),
                             validator: (value) {
                               if (value.isEmpty) {
-                                return 'Please enter your first name';
+                                return 'Favor colocar CPF.';
                               }
                             },
                             onSaved: (val) =>
-                                setState(() => _user.firstName = val),
+                                setState(() => _user.cpf = val),
                           ),
                           TextFormField(
                               decoration:
-                              InputDecoration(labelText: 'Last name'),
+                              InputDecoration(labelText: 'Senha'),
                               validator: (value) {
                                 if (value.isEmpty) {
-                                  return 'Please enter your last name.';
+                                  return 'Favor colocar senha.';
                                 }
                               },
                               onSaved: (val) =>
-                                  setState(() => _user.lastName = val)),
+                                  setState(() => _user.password = val)),
                           Container(
                               padding: const EdgeInsets.symmetric(
                                   vertical: 16.0, horizontal: 16.0),
@@ -56,8 +57,25 @@ class _HomeMaterialState extends State<HomeMaterial> {
                                       _showDialog(context);
                                     }
                                   },
-                                  child: Text('Save'))),
-                        ])))));
+                                  child: Text('Entrar')
+                              )
+                          ),
+                          Container(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 16.0, horizontal: 16.0),
+                              child: RaisedButton(
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, Routes.register);
+                                  },
+                                  child: Text('Registrar')
+                              )
+                          ),
+                        ]
+                    )
+                )
+            )
+        )
+    );
   }
 
   _showDialog(BuildContext context) {
