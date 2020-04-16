@@ -55,6 +55,7 @@ class _HomeMaterialState extends State<HomeMaterial> {
                                       form.save();
                                       _user.save();
                                       _showDialog(context);
+                                      Navigator.pushNamed(context, Routes.appBody);
                                     }
                                   },
                                   child: Text('Entrar')

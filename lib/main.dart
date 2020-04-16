@@ -1,5 +1,6 @@
 import 'package:covidapp/controllers/routes.dart';
-import 'package:covidapp/views/form.dart';
+import 'package:covidapp/views/appBody.dart';
+import 'package:covidapp/views/login.dart';
 import 'package:covidapp/views/register.dart';
 import 'package:flutter/material.dart';
 import 'controllers/routes.dart';
@@ -23,6 +24,9 @@ class MyApp extends StatelessWidget {
             break;
           case Routes.register:
             return MaterialPageRoute(builder: (context) => Register());
+            break;
+          case Routes.appBody:
+            return MaterialPageRoute(builder: (context) => AppBody());
             break;
           default:
             return MaterialPageRoute(builder: (context) => HomeMaterial());
