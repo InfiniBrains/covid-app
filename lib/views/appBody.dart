@@ -38,10 +38,7 @@ class _AppBody extends State<AppBody> {
   @override
   Widget build(BuildContext context) {
     List<Widget> _widgetOptions = <Widget>[
-      Text(
-        'Index 0: Home',
-        style: optionStyle,
-      ),
+      profile(context),
       choiceChips(context),
       precautions(context),
       speakToDoctor(context),
@@ -55,6 +52,28 @@ class _AppBody extends State<AppBody> {
         ),
         bottomNavigationBar: bottomBar(context),
       ),
+    );
+  }
+  // profile widget
+  Widget profile(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          'Nome',
+          textAlign: TextAlign.center,
+        ),
+        Image(
+          alignment: Alignment.center,
+          image: NetworkImage('https://via.placeholder.com/150'),
+        ),
+        Text(
+          'Sintomas',
+          textAlign: TextAlign.center,
+        ),
+        Text(
+            selectedChoices.join(" , ")
+        )
+      ],
     );
   }
   // Symptoms choice picker
