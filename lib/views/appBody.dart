@@ -9,12 +9,18 @@ class AppBody extends StatefulWidget {
 
 class _AppBody extends State<AppBody> {
   bool isSelected = false;
+  // List for choice chips
   List<String> reportList = [
     "Tosse",
     "Febre",
     "Falta de ar",
-    "Perda do paladar",
-    "Diarréia"
+    "Perda de oufato",
+    "Diarréia",
+    "Espirros",
+    "Enjoô",
+    "Tosse",
+    "Dor no corpo",
+    "Dor na Garganta",
   ];
   List<String> selectedChoices = List();
 
@@ -37,23 +43,33 @@ class _AppBody extends State<AppBody> {
         style: optionStyle,
       ),
       choiceChips(context),
-      Text(
-        'Index 2: School',
-        style: optionStyle,
-      ),
+      precautions(context),
+      speakToDoctor(context),
+      chat(context),
+      config(context),
     ];
-    return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+          child: _widgetOptions.elementAt(_selectedIndex),
+        ),
+        bottomNavigationBar: bottomBar(context),
       ),
-      bottomNavigationBar: bottomBar(context),
     );
   }
-
+  // Symptoms choice picker
   Widget choiceChips(BuildContext context) {
-    return Wrap(
-      children: _buildChoiceList(),
-    );
+    return Column( children: [
+      Container(
+        child: Text(
+          'O QUE VOCÊ ESTÁ SENTINDO AGORA?',
+          style: optionStyle,
+        ),
+      ),
+        Wrap(
+        children: _buildChoiceList(),
+    )
+    ]);
   }
   _buildChoiceList() {
     List<Widget> choices = List();
@@ -74,10 +90,81 @@ class _AppBody extends State<AppBody> {
       ));
     });    return choices;
   }
-  
+  // precautions widget
+  Widget precautions(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          'Precauções e Recomendações',
+          textAlign: TextAlign.center,
+        ),
+        Image(
+          alignment: Alignment.center,
+          image: NetworkImage('https://via.placeholder.com/150'),
+        ),
+        Text(
+          'Pokem ipsum dolor sit amet Escavalier Gold Blaziken Altaria Victini Parasect.'
+              ' Earthquake Tynamo Giovanni Dratini Glitch City make it double Volcarona.'
+              ' Cascade Badge Thundurus Swalot Palpitoad Cloyster ex ea commodo consequat Staraptor.'
+              ' Poison Sinnoh Blitzle Spiritomb Archen Rotom Wooper. '
+              'Rock Flygon Lanturn Swalot Riolu Chinchou Skarmory.'
+        )
+      ],
+    );
+  }
+  // speak o your doctor widget
+  Widget speakToDoctor(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          'Fale com seu Médico',
+          textAlign: TextAlign.center,
+        ),
+        Text(
+            'Número para Contato',
+          textAlign: TextAlign.center,
+        )
+      ],
+    );
+  }
+  // todo: implement chat widget
+  Widget chat(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          'INSIRA AQUI O CHAT',
+          textAlign: TextAlign.center,
+        ),
+      ],
+    );
+  }
+  //todo: app config
+  Widget config(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          'CONFIGURAÇÕES',
+          textAlign: TextAlign.center,
+        ),
+      ],
+    );
+  }
+  //todo: transformar em topNavBar
   Widget bottomBar(BuildContext context) {
     return BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             title: Text('Home'),
