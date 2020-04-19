@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/user.dart';
+import 'package:cpfcnpj/cpfcnpj.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -28,6 +29,9 @@ class _RegisterState extends State<Register> {
                             validator: (value) {
                               if (value.isEmpty) {
                                 return 'Favor colocar CPF.';
+                              }
+                              if (!CPF.isValid(value)) {
+                                return 'CPF inválido.';
                               }
                             },
                             onSaved: (val) => setState(() => _user.cpf = val),

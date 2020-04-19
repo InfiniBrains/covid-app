@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:covidapp/controllers/routes.dart';
+import 'package:covidapp/models/user.dart';
 import 'package:flutter/material.dart';
 
 class AppBody extends StatefulWidget {
@@ -10,18 +13,7 @@ class AppBody extends StatefulWidget {
 class _AppBody extends State<AppBody> {
   bool isSelected = false;
   // List for choice chips
-  List<String> reportList = [
-    "Tosse",
-    "Febre",
-    "Falta de ar",
-    "Perda de oufato",
-    "Diarréia",
-    "Espirros",
-    "Enjoô",
-    "Tosse",
-    "Dor no corpo",
-    "Dor na Garganta",
-  ];
+
   List<String> selectedChoices = List();
 
   int _selectedIndex = 0;
@@ -92,7 +84,7 @@ class _AppBody extends State<AppBody> {
   }
   _buildChoiceList() {
     List<Widget> choices = List();
-    reportList.forEach((item) {
+    User().reportList.forEach((item) {
       choices.add(Container(
         padding: const EdgeInsets.all(2.0),
         child: ChoiceChip(
@@ -103,6 +95,7 @@ class _AppBody extends State<AppBody> {
               selectedChoices.contains(item)
                   ? selectedChoices.remove(item)
                   : selectedChoices.add(item);
+              log(item);
             });
           },
         ),

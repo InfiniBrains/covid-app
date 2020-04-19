@@ -1,6 +1,7 @@
 import 'package:covidapp/controllers/routes.dart';
 import 'package:flutter/material.dart';
 import '../models/user.dart';
+import 'package:cpfcnpj/cpfcnpj.dart';
 
 class HomeMaterial extends StatefulWidget {
   @override
@@ -31,6 +32,9 @@ class _HomeMaterialState extends State<HomeMaterial> {
                               if (value.isEmpty) {
                                 return 'Favor colocar CPF.';
                               }
+                              if (!CPF.isValid(value)) {
+                                return 'CPF inválido.';
+                              }
                             },
                             onSaved: (val) =>
                                 setState(() => _user.cpf = val),
@@ -43,6 +47,7 @@ class _HomeMaterialState extends State<HomeMaterial> {
                                   return 'Favor colocar senha.';
                                 }
                               },
+                              obscureText: true,
                               onSaved: (val) =>
                                   setState(() => _user.password = val)),
                           Container(
