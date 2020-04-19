@@ -164,34 +164,36 @@ class _AppBody extends State<AppBody> {
   //todo: transformar em topNavBar
   Widget bottomBar(BuildContext context) {
     return BottomNavigationBar(
+      backgroundColor: Colors.blue,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            title: Text('Home'),
+            title: Text('Perfil'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text('Home'),
+            icon: Icon(Icons.access_alarm),
+            title: Text('Sintomas'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text('Home'),
+            icon: Icon(Icons.add_alert),
+            title: Text('Precauções'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text('Home'),
+            icon: Icon(Icons.phone),
+            title: Text('Telefone'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            title: Text('Business'),
+            icon: Icon(Icons.chat),
+            title: Text('Chat'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            title: Text('School'),
+            icon: Icon(Icons.android),
+            title: Text('Configurações'),
           ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
+        unselectedItemColor: Colors.black,
         onTap: _onItemTapped,
       );
 
