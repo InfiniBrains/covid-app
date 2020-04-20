@@ -1,5 +1,6 @@
 class User {
   String cpf = '';
+  String email = '';
   String password = '';
   String name = '';
   String birth = '';
