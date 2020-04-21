@@ -1,4 +1,3 @@
-import 'package:covidapp/models/user.dart';
 import 'package:http/http.dart' as http;
 
 import 'credentials.dart';
@@ -13,8 +12,9 @@ class Request{
     form["name"] = credentials.name;
     form["zip"] = credentials.zip;
 
-    var uri = "/users";
+    var uri = "http://localhost:1337/users";
     var res = await http.Client().post(Uri.encodeFull(uri), body: form);
+    print(res);
 
 
   }
