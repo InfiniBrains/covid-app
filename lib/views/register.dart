@@ -48,15 +48,6 @@ class _RegisterState extends State<Register> {
                             onSaved: (val) => setState(() => _user.name = val),
                           ),
                           TextFormField(
-                            decoration: InputDecoration(labelText: 'Senha'),
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return 'Favor colocar nome.';
-                              }
-                            },
-                            onSaved: (val) => setState(() => _user.password = val),
-                          ),
-                          TextFormField(
                             decoration: InputDecoration(labelText: 'Estado'),
                             validator: (value) {
                               if (value.isEmpty) {
@@ -91,7 +82,7 @@ class _RegisterState extends State<Register> {
                                   onPressed: () {
                                     final form = _registerKey.currentState;
                                     if (form.validate()) {
-                                      Request.register(RegisterCredentials(username: _user.cpf, password: _user.password, email: _user.email, name: _user.name, cpf: _user.cpf, zip: _user.city));
+                                      Request.register(RegisterCredentials(username: _user.cpf, password: _user.cpf, email: _user.email, name: _user.name, cpf: _user.cpf, zip: _user.city));
                                       form.save();
                                       _user.save();
                                       _showDialog(context);
