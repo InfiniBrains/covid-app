@@ -2,6 +2,7 @@ import 'package:covidapp/controllers/routes.dart';
 import 'package:flutter/material.dart';
 import '../models/user.dart';
 import 'package:cpfcnpj/cpfcnpj.dart';
+import 'package:covidapp/controllers/api.dart';
 
 class HomeMaterial extends StatefulWidget {
   @override
@@ -39,17 +40,6 @@ class _HomeMaterialState extends State<HomeMaterial> {
                             onSaved: (val) =>
                                 setState(() => _user.cpf = val),
                           ),
-                          TextFormField(
-                              decoration:
-                              InputDecoration(labelText: 'Senha'),
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  return 'Favor colocar senha.';
-                                }
-                              },
-                              obscureText: true,
-                              onSaved: (val) =>
-                                  setState(() => _user.password = val)),
                           Container(
                               padding: const EdgeInsets.symmetric(
                                   vertical: 16.0, horizontal: 16.0),
@@ -57,6 +47,7 @@ class _HomeMaterialState extends State<HomeMaterial> {
                                   onPressed: () {
                                     final form = _formKey.currentState;
                                     if (form.validate()) {
+                                      Request.login(_user.cpf);
                                       form.save();
                                       _user.save();
                                       _showDialog(context);

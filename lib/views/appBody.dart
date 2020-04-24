@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:covidapp/controllers/routes.dart';
+import 'package:covidapp/models/form.dart';
 import 'package:covidapp/models/user.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,10 @@ class _AppBody extends State<AppBody> {
   // List for choice chips
 
   List<String> selectedChoices = List();
+
+  SymptomsForm symptoms;
+
+  Map<String, dynamic> symptomsPost = Map();
 
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
@@ -95,7 +100,7 @@ class _AppBody extends State<AppBody> {
               selectedChoices.contains(item)
                   ? selectedChoices.remove(item)
                   : selectedChoices.add(item);
-              log(item);
+              print(item);
             });
           },
         ),
