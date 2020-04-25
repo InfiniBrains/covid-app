@@ -66,6 +66,24 @@ class _RegisterState extends State<Register> {
                             onSaved: (val) => setState(() => _user.city = val),
                           ),
                           TextFormField(
+                            decoration: InputDecoration(labelText: 'CEP'),
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Favor colocar nome.';
+                              }
+                            },
+                            onSaved: (val) => setState(() => _user.zip = val),
+                          ),
+                          TextFormField(
+                            decoration: InputDecoration(labelText: 'email'),
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Favor colocar nome.';
+                              }
+                            },
+                            onSaved: (val) => setState(() => _user.email = val),
+                          ),
+                          TextFormField(
                               decoration: InputDecoration(
                                   labelText: 'Data de nascimento'),
                               validator: (value) {
@@ -85,6 +103,7 @@ class _RegisterState extends State<Register> {
                                       Request.register(RegisterCredentials(username: _user.cpf, password: _user.cpf, email: _user.email, name: _user.name, cpf: _user.cpf, zip: _user.city));
                                       form.save();
                                       _user.save();
+                                      print(_user.email);
                                       _showDialog(context);
                                     }
                                   },

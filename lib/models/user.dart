@@ -6,6 +6,7 @@ class User {
   String birth = '';
   String state = '';
   String city = '';
+  String zip = '';
   List<String> reportList = [
     "Tosse",
     "Febre",

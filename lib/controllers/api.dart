@@ -10,14 +10,15 @@ class Request{
   static Future<String> register(RegisterCredentials credentials) async {
     Map<String, String> form = new Map();
     form["username"] = credentials.cpf;
-    form["password"] = credentials.password;
+    form["password"] = credentials.cpf;
+    form["cpf"] = credentials.cpf;
     form["email"] = credentials.email;
     form["name"] = credentials.name;
     form["zip"] = credentials.zip;
 
-    var uri = "http://localhost:1337/users";
+    var uri = "https://covid-the.herokuapp.com/users";
     var res = await http.Client().post(Uri.encodeFull(uri), body: form);
-    print(res);
+    print(res.body);
 
   }
 
@@ -26,9 +27,9 @@ class Request{
     form["username"] = cpf;
     form["password"] = cpf;
 
-    var uri = "http://localhost:1337/users";
-    var res = await http.Client().post(Uri.encodeFull(uri), body: form);
-    print(res);
+    var uri = "https://covid-the.herokuapp.com/users/" + cpf;
+    var res = await http.Client().get(Uri.encodeFull(uri));
+    print(res.body);
 
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
