@@ -13,6 +13,8 @@ class _RegisterState extends State<Register> {
   final _registerKey = GlobalKey<FormState>();
   final _user = User();
 
+  // todo: get user geolocation
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
