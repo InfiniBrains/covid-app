@@ -22,8 +22,11 @@ class _AppBody extends State<AppBody> {
   Map<String, dynamic> symptomsPost = Map();
 
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const TextStyle titletext =
+  TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.blue);
+  static const TextStyle bodytext =
+  TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.blue);
+
 
   void _onItemTapped(int index) {
     setState(() {
@@ -55,18 +58,34 @@ class _AppBody extends State<AppBody> {
   Widget profile(BuildContext context) {
     return Column(
       children: [
+        SizedBox(height: 50,),
+          Text(
+            'Nome',
+            textAlign: TextAlign.center,
+            style: titletext,
+        ),
+        SizedBox(height: 20,),
+        Container(
+          width: 150,
+          height: 150,
+          decoration: new BoxDecoration(
+            shape: BoxShape.circle,
+            border: new Border.all(
+              width: 2,
+              color: Colors.blue,
+            ) ,
+            image: new DecorationImage(
+                fit: BoxFit.fill,
+                image: new NetworkImage('https://via.placeholder.com/150'))
+          )
+        ),
+        SizedBox(height: 20,),
         Text(
-          'Nome',
+          'SINTOMAS:',
           textAlign: TextAlign.center,
+          style: bodytext,
         ),
-        Image(
-          alignment: Alignment.center,
-          image: NetworkImage('https://via.placeholder.com/150'),
-        ),
-        Text(
-          'Sintomas',
-          textAlign: TextAlign.center,
-        ),
+        SizedBox(height: 20,),
         Text(
             selectedChoices.join(" , ")
         )
@@ -76,12 +95,14 @@ class _AppBody extends State<AppBody> {
   // Symptoms choice picker
   Widget choiceChips(BuildContext context) {
     return Column( children: [
+      SizedBox(height: 50,),
       Container(
         child: Text(
-          'O QUE VOCÊ ESTÁ SENTINDO AGORA?',
-          style: optionStyle,
+          'O que estou sentindo agora?',
+          style: titletext,
         ),
       ),
+      SizedBox(height: 20,),
         Wrap(
         children: _buildChoiceList(),
     )
@@ -111,14 +132,18 @@ class _AppBody extends State<AppBody> {
   Widget precautions(BuildContext context) {
     return Column(
       children: [
+        SizedBox(height: 50,),
         Text(
           'Precauções e Recomendações',
           textAlign: TextAlign.center,
+          style: titletext,
         ),
+        SizedBox(height: 20,),
         Image(
           alignment: Alignment.center,
           image: NetworkImage('https://via.placeholder.com/150'),
         ),
+        SizedBox(height: 20,),
         Text(
           'Pokem ipsum dolor sit amet Escavalier Gold Blaziken Altaria Victini Parasect.'
               ' Earthquake Tynamo Giovanni Dratini Glitch City make it double Volcarona.'
@@ -133,13 +158,17 @@ class _AppBody extends State<AppBody> {
   Widget speakToDoctor(BuildContext context) {
     return Column(
       children: [
+        SizedBox(height: 50,),
         Text(
           'Fale com seu Médico',
           textAlign: TextAlign.center,
+          style: titletext,
         ),
+        SizedBox(height: 20,),
         Text(
             'Número para Contato',
           textAlign: TextAlign.center,
+          style: bodytext,
         )
       ],
     );
@@ -159,9 +188,11 @@ class _AppBody extends State<AppBody> {
   Widget config(BuildContext context) {
     return Column(
       children: [
+        SizedBox(height: 50,),
         Text(
-          'CONFIGURAÇÕES',
+          'Configurações',
           textAlign: TextAlign.center,
+          style: titletext,
         ),
       ],
     );
@@ -176,11 +207,11 @@ class _AppBody extends State<AppBody> {
             title: Text('Perfil'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.access_alarm),
+            icon: Icon(Icons.content_paste),
             title: Text('Sintomas'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add_alert),
+            icon: Icon(Icons.report),
             title: Text('Precauções'),
           ),
           BottomNavigationBarItem(
@@ -192,7 +223,7 @@ class _AppBody extends State<AppBody> {
             title: Text('Chat'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.android),
+            icon: Icon(Icons.settings),
             title: Text('Configurações'),
           ),
         ],
