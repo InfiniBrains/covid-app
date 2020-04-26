@@ -1,3 +1,5 @@
+import 'dart:wasm';
+
 class User {
   String cpf = '';
   String email = '';
@@ -7,6 +9,10 @@ class User {
   String state = '';
   String city = '';
   String zip = '';
+  List coordinates = [];
+  Object location = {
+    "type": "point",
+  };
   List<String> reportList = [
     "Tosse",
     "Febre",

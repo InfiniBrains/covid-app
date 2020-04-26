@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:covidapp/controllers/api.dart';
 import 'package:covidapp/controllers/credentials.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import '../models/user.dart';
 import 'package:cpfcnpj/cpfcnpj.dart';
 
@@ -13,7 +16,15 @@ class _RegisterState extends State<Register> {
   final _registerKey = GlobalKey<FormState>();
   final _user = User();
 
-  // todo: get user geolocation
+  // todo: make the geoJson
+  void _getLocation() async {
+    var currentLocation = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+    _user.coordinates.add(currentLocation.latitude);
+    _user.coordinates.add(currentLocation.longitude);
+    print(_user.coordinates);
+    print(_user.location);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +39,11 @@ class _RegisterState extends State<Register> {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
+                          FloatingActionButton(
+                            onPressed: _getLocation,
+                            tooltip: 'Get Location',
+                            child: Icon(Icons.flag),
+                          ),
                           TextFormField(
                             decoration: InputDecoration(labelText: 'CPF'),
                             validator: (value) {

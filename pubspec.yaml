@@ -19,6 +19,7 @@ environment:
 dependencies:
   cpfcnpj: ^1.0.3
   http: any
+  geolocator: ^5.1.4+2
   flutter:
     sdk: flutter
 

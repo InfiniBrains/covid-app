@@ -24,11 +24,12 @@ class Request{
 
   static Future<String> login(String cpf) async {
     Map<String, String> form = new Map();
-    form["username"] = cpf;
+    form["identifier"] = cpf;
     form["password"] = cpf;
 
-    var uri = "https://covid-the.herokuapp.com/users/" + cpf;
-    var res = await http.Client().get(Uri.encodeFull(uri));
+    var uri = "https://covid-the.herokuapp.com/users";
+    var res = await http.Client().post(Uri.encodeFull(uri), body: form);
+    print(cpf.toString());
     print(res.body);
 
     if (res.statusCode == 200) {
