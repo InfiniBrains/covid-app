@@ -5,6 +5,7 @@ import 'package:covidapp/controllers/routes.dart';
 import 'package:covidapp/models/form.dart';
 import 'package:covidapp/models/user.dart';
 import 'package:flutter/material.dart';
+import 'package:covidapp/controllers/api.dart';
 
 class AppBody extends StatefulWidget {
 
@@ -42,6 +43,11 @@ class _AppBody extends State<AppBody> {
     symptoms.dizziness = sint['Tontura'];
     symptoms.diarrhea = sint['Diarreia'];
     symptoms.vomit = sint['Vomito'];
+    symptoms.throatProblems = sint['Dor de Garganta'];
+    symptoms.exposed = sint['Contato com Infectado'];
+    symptoms.tiredness = sint['Cansaço'];
+    symptoms.nausea = sint['Nausea'];
+    Request.postSymptoms(symptoms);
 
   }
 
@@ -58,6 +64,10 @@ class _AppBody extends State<AppBody> {
     'Tontura': false,
     'Diarreia': false,
     'Vomito': false,
+    'Dor de Garganta': false,
+    'Contato com Infectado': false,
+    'Cansaço': false,
+    'Nausea': false,
 
   };
 
@@ -131,7 +141,6 @@ class _AppBody extends State<AppBody> {
                   : selectedChoices.add('${k}');
               sint['${k}'] = selected;
               sintomas();
-              print(sint);
             });
           },
         ),

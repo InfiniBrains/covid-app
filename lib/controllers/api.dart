@@ -42,10 +42,23 @@ class Request{
   static Future<String> postSymptoms(SymptomsForm symptomsForm) async {
     Map<String, bool> form = new Map();
     form["dryCough"] = symptomsForm.dryCough;
+    form["fever"] = symptomsForm.fever;
+    form["bodyAche"] = symptomsForm.bodyAche;
+    form["headAche"] = symptomsForm.headAche;
+    form["throatProblems"] = symptomsForm.throatProblems;
+    form["tiredness"] = symptomsForm.tiredness;
+    form["diarrhea"] = symptomsForm.diarrhea;
+    form["vomit"] = symptomsForm.vomit;
+    form["dizziness"] = symptomsForm.dizziness;
+    form["smell"] = symptomsForm.smell;
+    form["taste"] = symptomsForm.taste;
+    form["stuffyNose"] = symptomsForm.stuffyNose;
+    form["nausea"] = symptomsForm.nausea;
 
-    var uri = "https://covid-the.herokuapp.com/form";
-    var res = await http.Client().post(Uri.encodeFull(uri), body: form);
-    print(res.body);
+    //var uri = "https://covid-the.herokuapp.com/form";
+    //var res = await http.Client().post(Uri.encodeFull(uri), body: form);
+    //print(res.body);
+    print(symptomsForm.exposed);
 
   }
 }
