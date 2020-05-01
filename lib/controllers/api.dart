@@ -1,3 +1,4 @@
+import 'package:covidapp/models/form.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -37,5 +38,14 @@ class Request{
       _jwt = map["jwt"];
       return _jwt;
     }
+  }
+  static Future<String> postSymptoms(SymptomsForm symptomsForm) async {
+    Map<String, bool> form = new Map();
+    form["dryCough"] = symptomsForm.dryCough;
+
+    var uri = "https://covid-the.herokuapp.com/form";
+    var res = await http.Client().post(Uri.encodeFull(uri), body: form);
+    print(res.body);
+
   }
 }

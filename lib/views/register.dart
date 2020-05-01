@@ -23,7 +23,6 @@ class _RegisterState extends State<Register> {
     _user.coordinates.add(currentLocation.latitude);
     _user.coordinates.add(currentLocation.longitude);
     print(_user.coordinates);
-    print(_user.location);
   }
 
   @override

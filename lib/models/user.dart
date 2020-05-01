@@ -10,11 +10,9 @@ class User {
   String city = '';
   String zip = '';
   List coordinates = [];
-  Object location = {
-    "type": "point",
-  };
+  String type = 'point';
   List<String> reportList = [
-    "Tosse",
+    "dryCough",
     "Febre",
     "Falta de ar",
     "Perda de oufato",

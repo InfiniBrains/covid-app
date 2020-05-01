@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:math';
 
 import 'package:covidapp/controllers/routes.dart';
 import 'package:covidapp/models/form.dart';
@@ -13,13 +14,12 @@ class AppBody extends StatefulWidget {
 
 class _AppBody extends State<AppBody> {
   bool isSelected = false;
+
   // List for choice chips
 
   List<String> selectedChoices = List();
 
-  SymptomsForm symptoms;
-
-  Map<String, dynamic> symptomsPost = Map();
+  SymptomsForm symptoms = new SymptomsForm();
 
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
@@ -30,7 +30,36 @@ class _AppBody extends State<AppBody> {
       _selectedIndex = index;
     });
   }
+  sintomas() {
+    symptoms.dryCough = sint['Tosse'];
+    symptoms.fever = sint['Febre'];
+    symptoms.stuffyNose = sint['Nariz Entupido'];
+    symptoms.shortOfBreath = sint['Falta de Ar'];
+    symptoms.bodyAche = sint['Dor no Corpo'];
+    symptoms.headAche = sint['Dor de Cabeça'];
+    symptoms.smell = sint['Perca de Olfato'];
+    symptoms.taste = sint['Perca de Paladar'];
+    symptoms.dizziness = sint['Tontura'];
+    symptoms.diarrhea = sint['Diarreia'];
+    symptoms.vomit = sint['Vomito'];
 
+  }
+
+  List<bool> test = [true, false];
+  Map<String,bool> sint = {
+    'Tosse': false,
+    'Nariz Entupido': false,
+    'Falta de Ar': false,
+    'Febre': false,
+    'Dor no Corpo': false,
+    'Dor de Cabeça': false,
+    'Perca de Olfato': false,
+    'Perca de Paladar': false,
+    'Tontura': false,
+    'Diarreia': false,
+    'Vomito': false,
+
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -82,25 +111,27 @@ class _AppBody extends State<AppBody> {
           style: optionStyle,
         ),
       ),
-        Wrap(
+      Wrap(
         children: _buildChoiceList(),
-    )
+          ),
     ]);
   }
   _buildChoiceList() {
     List<Widget> choices = List();
-    User().reportList.forEach((item) {
+    sint.forEach((k,v) {
       choices.add(Container(
         padding: const EdgeInsets.all(2.0),
         child: ChoiceChip(
-          label: Text(item),
-          selected: selectedChoices.contains(item),
+          label: Text('${k}'),
+          selected: selectedChoices.contains('${k}'),
           onSelected: (selected) {
             setState(() {
-              selectedChoices.contains(item)
-                  ? selectedChoices.remove(item)
-                  : selectedChoices.add(item);
-              print(item);
+              selectedChoices.contains('${k}')
+                  ? selectedChoices.remove('${k}')
+                  : selectedChoices.add('${k}');
+              sint['${k}'] = selected;
+              sintomas();
+              print(sint);
             });
           },
         ),
