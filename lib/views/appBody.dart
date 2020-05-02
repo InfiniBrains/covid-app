@@ -1,9 +1,4 @@
-import 'dart:developer';
-import 'dart:math';
-
-import 'package:covidapp/controllers/routes.dart';
 import 'package:covidapp/models/form.dart';
-import 'package:covidapp/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:covidapp/controllers/api.dart';
 
@@ -51,7 +46,6 @@ class _AppBody extends State<AppBody> {
 
   }
 
-  List<bool> test = [true, false];
   Map<String,bool> sint = {
     'Tosse': false,
     'Nariz Entupido': false,
