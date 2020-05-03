@@ -1,3 +1,5 @@
+import 'dart:wasm';
+
 class User {
   String cpf = '';
   String email = '';
@@ -6,8 +8,11 @@ class User {
   String birth = '';
   String state = '';
   String city = '';
+  String zip = '';
+  List coordinates = [];
+  String type = 'point';
   List<String> reportList = [
-    "Tosse",
+    "dryCough",
     "Febre",
     "Falta de ar",
     "Perda de oufato",
@@ -18,9 +23,4 @@ class User {
     "Dor na Garganta",
   ];
   List<String> symptoms =[];
-
-  //  todo: Make the post function
-  save() {
-    print('post login');
-  }
 }

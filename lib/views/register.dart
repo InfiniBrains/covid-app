@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:covidapp/controllers/api.dart';
 import 'package:covidapp/controllers/credentials.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import '../models/user.dart';
 import 'package:cpfcnpj/cpfcnpj.dart';
 
@@ -12,6 +15,15 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final _registerKey = GlobalKey<FormState>();
   final _user = User();
+
+  // todo: make the geoJson
+  void _getLocation() async {
+    var currentLocation = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+    _user.coordinates.add(currentLocation.latitude);
+    _user.coordinates.add(currentLocation.longitude);
+    print(_user.coordinates);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +38,11 @@ class _RegisterState extends State<Register> {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
+                          FloatingActionButton(
+                            onPressed: _getLocation,
+                            tooltip: 'Get Location',
+                            child: Icon(Icons.flag),
+                          ),
                           TextFormField(
                             decoration: InputDecoration(labelText: 'CPF'),
                             validator: (value) {
@@ -66,6 +83,24 @@ class _RegisterState extends State<Register> {
                             onSaved: (val) => setState(() => _user.city = val),
                           ),
                           TextFormField(
+                            decoration: InputDecoration(labelText: 'CEP'),
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Favor colocar nome.';
+                              }
+                            },
+                            onSaved: (val) => setState(() => _user.zip = val),
+                          ),
+                          TextFormField(
+                            decoration: InputDecoration(labelText: 'email'),
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Favor colocar nome.';
+                              }
+                            },
+                            onSaved: (val) => setState(() => _user.email = val),
+                          ),
+                          TextFormField(
                               decoration: InputDecoration(
                                   labelText: 'Data de nascimento'),
                               validator: (value) {
@@ -84,7 +119,7 @@ class _RegisterState extends State<Register> {
                                     if (form.validate()) {
                                       Request.register(RegisterCredentials(username: _user.cpf, password: _user.cpf, email: _user.email, name: _user.name, cpf: _user.cpf, zip: _user.city));
                                       form.save();
-                                      _user.save();
+                                      print(_user.email);
                                       _showDialog(context);
                                     }
                                   },

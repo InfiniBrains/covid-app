@@ -1,9 +1,6 @@
-import 'dart:developer';
-
-import 'package:covidapp/controllers/routes.dart';
 import 'package:covidapp/models/form.dart';
-import 'package:covidapp/models/user.dart';
 import 'package:flutter/material.dart';
+import 'package:covidapp/controllers/api.dart';
 
 class AppBody extends StatefulWidget {
 
@@ -13,13 +10,12 @@ class AppBody extends StatefulWidget {
 
 class _AppBody extends State<AppBody> {
   bool isSelected = false;
+
   // List for choice chips
 
   List<String> selectedChoices = List();
 
-  SymptomsForm symptoms;
-
-  Map<String, dynamic> symptomsPost = Map();
+  SymptomsForm symptoms = new SymptomsForm();
 
   int _selectedIndex = 0;
   static const TextStyle titletext =
@@ -33,7 +29,44 @@ class _AppBody extends State<AppBody> {
       _selectedIndex = index;
     });
   }
+  sintomas() {
+    symptoms.dryCough = sint['Tosse'];
+    symptoms.fever = sint['Febre'];
+    symptoms.stuffyNose = sint['Nariz Entupido'];
+    symptoms.shortOfBreath = sint['Falta de Ar'];
+    symptoms.bodyAche = sint['Dor no Corpo'];
+    symptoms.headAche = sint['Dor de Cabeça'];
+    symptoms.smell = sint['Perca de Olfato'];
+    symptoms.taste = sint['Perca de Paladar'];
+    symptoms.dizziness = sint['Tontura'];
+    symptoms.diarrhea = sint['Diarreia'];
+    symptoms.vomit = sint['Vomito'];
+    symptoms.throatProblems = sint['Dor de Garganta'];
+    symptoms.exposed = sint['Contato com Infectado'];
+    symptoms.tiredness = sint['Cansaço'];
+    symptoms.nausea = sint['Nausea'];
+    Request.postSymptoms(symptoms);
 
+  }
+
+  Map<String,bool> sint = {
+    'Tosse': false,
+    'Nariz Entupido': false,
+    'Falta de Ar': false,
+    'Febre': false,
+    'Dor no Corpo': false,
+    'Dor de Cabeça': false,
+    'Perca de Olfato': false,
+    'Perca de Paladar': false,
+    'Tontura': false,
+    'Diarreia': false,
+    'Vomito': false,
+    'Dor de Garganta': false,
+    'Contato com Infectado': false,
+    'Cansaço': false,
+    'Nausea': false,
+
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -105,23 +138,24 @@ class _AppBody extends State<AppBody> {
       SizedBox(height: 20,),
         Wrap(
         children: _buildChoiceList(),
-    )
+          ),
     ]);
   }
   _buildChoiceList() {
     List<Widget> choices = List();
-    User().reportList.forEach((item) {
+    sint.forEach((k,v) {
       choices.add(Container(
         padding: const EdgeInsets.all(2.0),
         child: ChoiceChip(
-          label: Text(item),
-          selected: selectedChoices.contains(item),
+          label: Text('${k}'),
+          selected: selectedChoices.contains('${k}'),
           onSelected: (selected) {
             setState(() {
-              selectedChoices.contains(item)
-                  ? selectedChoices.remove(item)
-                  : selectedChoices.add(item);
-              print(item);
+              selectedChoices.contains('${k}')
+                  ? selectedChoices.remove('${k}')
+                  : selectedChoices.add('${k}');
+              sint['${k}'] = selected;
+              sintomas();
             });
           },
         ),
