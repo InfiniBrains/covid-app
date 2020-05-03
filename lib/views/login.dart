@@ -47,7 +47,7 @@ class _HomeMaterialState extends State<HomeMaterial> {
                                   onPressed: () {
                                     final form = _formKey.currentState;
                                     if (form.validate()) {
-                                      Request.login(_user.cpf);
+                                      login();
                                       form.save();
                                       _showDialog(context);
                                       // Navigator.pushNamed(context, Routes.appBody);
@@ -77,5 +77,11 @@ class _HomeMaterialState extends State<HomeMaterial> {
   _showDialog(BuildContext context) {
     Scaffold.of(context)
         .showSnackBar(SnackBar(content: Text('Submitting form')));
+  }
+  Future login() async {
+    var jwt =await Request.login(_user.cpf);
+    if(jwt != null){
+      Navigator.pushNamed(context, Routes.appBody);
+    }
   }
 }

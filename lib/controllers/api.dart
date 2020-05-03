@@ -7,8 +7,9 @@ import 'credentials.dart';
 class Request{
 
   static String _jwt;
+  static String _userId;
   //static String url = 'https://covid-the.herokuapp.com';
-  static String url = 'https://http://localhost:1337';
+  static String url = 'http://10.0.2.2:1337';
 
   static Future<String> register(RegisterCredentials credentials) async {
     Map<String, String> form = new Map();
@@ -32,19 +33,21 @@ class Request{
 
     var uri = url + "/auth/local";
     var res = await http.Client().post(Uri.encodeFull(uri), body: form);
-    print(cpf.toString());
-    print(res.body);
 
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
+      Map<String, dynamic> mapUser = map["user"];
+      print(map);
       _jwt = map["jwt"];
+      _userId = mapUser["_id"];
       return _jwt;
     }else{
       return null;
     }
   }
+  //todo:improve user id injection on backend
   static Future<String> postSymptoms(SymptomsForm symptomsForm) async {
-    Map<String, bool> form = new Map();
+    Map<String, dynamic> form = new Map();
     form["dryCough"] = symptomsForm.dryCough;
     form["fever"] = symptomsForm.fever;
     form["bodyAche"] = symptomsForm.bodyAche;
@@ -58,21 +61,21 @@ class Request{
     form["taste"] = symptomsForm.taste;
     form["stuffyNose"] = symptomsForm.stuffyNose;
     form["nausea"] = symptomsForm.nausea;
+    form["user"] = _userId;
 
     Map<String, String> header = new Map();
     header["Authorization"] = "Bearer " + _jwt;
 
-    //var uri = url + "/form";
-    //var res = await http.Client().post(Uri.encodeFull(uri), body: form, headers: header);
-    //print(res.body);
-    print(symptomsForm.exposed);
+    var uri = url + "/forms";
+    var res = await http.Client().post(Uri.encodeFull(uri), body: jsonEncode(form));
+    print(res.body);
 
   }
   static Future<String> getSymptoms() async {
     Map<String, String> header = new Map();
     header["Authorization"] = "Bearer " + _jwt;
 
-    var uri = url + "/form";
+    var uri = url + "/users/me";
     var res = await http.Client().get(Uri.encodeFull(uri), headers: header);
     print(res.body);
 
