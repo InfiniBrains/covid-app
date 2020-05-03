@@ -119,7 +119,6 @@ class _RegisterState extends State<Register> {
                                     if (form.validate()) {
                                       Request.register(RegisterCredentials(username: _user.cpf, password: _user.cpf, email: _user.email, name: _user.name, cpf: _user.cpf, zip: _user.city));
                                       form.save();
-                                      _user.save();
                                       print(_user.email);
                                       _showDialog(context);
                                     }

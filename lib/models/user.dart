@@ -23,9 +23,4 @@ class User {
     "Dor na Garganta",
   ];
   List<String> symptoms =[];
-
-  //  todo: Make the post function
-  save() {
-    print('post login');
-  }
 }

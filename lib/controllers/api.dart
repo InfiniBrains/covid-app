@@ -55,10 +55,22 @@ class Request{
     form["stuffyNose"] = symptomsForm.stuffyNose;
     form["nausea"] = symptomsForm.nausea;
 
+    Map<String, String> header = new Map();
+    header["Authorization"] = "Bearer " + _jwt;
+
     //var uri = "https://covid-the.herokuapp.com/form";
-    //var res = await http.Client().post(Uri.encodeFull(uri), body: form);
+    //var res = await http.Client().post(Uri.encodeFull(uri), body: form, headers: header);
     //print(res.body);
     print(symptomsForm.exposed);
+
+  }
+  static Future<String> getSymptoms() async {
+    Map<String, String> header = new Map();
+    header["Authorization"] = "Bearer " + _jwt;
+
+    var uri = "https://covid-the.herokuapp.com/form";
+    var res = await http.Client().get(Uri.encodeFull(uri), headers: header);
+    print(res.body);
 
   }
 }
