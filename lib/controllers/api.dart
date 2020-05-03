@@ -7,6 +7,8 @@ import 'credentials.dart';
 class Request{
 
   static String _jwt;
+  //static String url = 'https://covid-the.herokuapp.com';
+  static String url = 'https://http://localhost:1337';
 
   static Future<String> register(RegisterCredentials credentials) async {
     Map<String, String> form = new Map();
@@ -17,7 +19,7 @@ class Request{
     form["name"] = credentials.name;
     form["zip"] = credentials.zip;
 
-    var uri = "https://covid-the.herokuapp.com/auth/local/register";
+    var uri = url + "/auth/local/register";
     var res = await http.Client().post(Uri.encodeFull(uri), body: form);
     print(res.body);
 
@@ -28,7 +30,7 @@ class Request{
     form["identifier"] = cpf;
     form["password"] = cpf;
 
-    var uri = "https://covid-the.herokuapp.com/auth/local";
+    var uri = url + "/auth/local";
     var res = await http.Client().post(Uri.encodeFull(uri), body: form);
     print(cpf.toString());
     print(res.body);
@@ -60,7 +62,7 @@ class Request{
     Map<String, String> header = new Map();
     header["Authorization"] = "Bearer " + _jwt;
 
-    //var uri = "https://covid-the.herokuapp.com/form";
+    //var uri = url + "/form";
     //var res = await http.Client().post(Uri.encodeFull(uri), body: form, headers: header);
     //print(res.body);
     print(symptomsForm.exposed);
@@ -70,7 +72,7 @@ class Request{
     Map<String, String> header = new Map();
     header["Authorization"] = "Bearer " + _jwt;
 
-    var uri = "https://covid-the.herokuapp.com/form";
+    var uri = url + "/form";
     var res = await http.Client().get(Uri.encodeFull(uri), headers: header);
     print(res.body);
 
