@@ -67,17 +67,19 @@ class Request{
     header["Authorization"] = "Bearer " + _jwt;
 
     var uri = url + "/forms";
-    var res = await http.Client().post(Uri.encodeFull(uri), body: jsonEncode(form));
+    var res = await http.Client().post(Uri.encodeFull(uri), body: jsonEncode(form), headers: header);
     print(res.body);
 
   }
-  static Future<String> getSymptoms() async {
+  static Future<List<dynamic>> getSymptoms() async {
     Map<String, String> header = new Map();
     header["Authorization"] = "Bearer " + _jwt;
 
-    var uri = url + "/users/me";
+    var uri = url + "/forms?user=" + _userId + "&_sort=updatedAt:DESC";
     var res = await http.Client().get(Uri.encodeFull(uri), headers: header);
-    print(res.body);
+    List form = jsonDecode(res.body);
+    //print(form[0]);
+    return form;
 
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:covidapp/models/form.dart';
 import 'package:flutter/material.dart';
 import 'package:covidapp/controllers/api.dart';
@@ -29,6 +31,12 @@ class _AppBody extends State<AppBody> {
       _selectedIndex = index;
     });
   }
+  Future getSymptoms() async {
+   var form = await Request.getSymptoms();
+   Map<String, dynamic> result = form[0];
+   symptoms = SymptomsForm.fromJson(result);
+   sintomasToMap();
+  }
   sintomas() {
     symptoms.dryCough = sint['Tosse'];
     symptoms.fever = sint['Febre'];
@@ -45,8 +53,27 @@ class _AppBody extends State<AppBody> {
     symptoms.exposed = sint['Contato com Infectado'];
     symptoms.tiredness = sint['Cansaço'];
     symptoms.nausea = sint['Nausea'];
-    Request.postSymptoms(symptoms);
-
+    //Request.postSymptoms(symptoms);
+  }
+  sintomasToMap() {
+    sint['Tosse'] = symptoms.dryCough;
+    sint['Febre'] = symptoms.fever;
+    sint['Nariz Entupido'] = symptoms.stuffyNose;
+    sint['Falta de Ar'] = symptoms.shortOfBreath;
+    sint['Dor no Corpo'] = symptoms.bodyAche;
+    sint['Dor de Cabeça'] = symptoms.headAche;
+    sint['Perca de Olfato'] = symptoms.smell;
+    sint['Perca de Paladar'] = symptoms.taste;
+    sint['Tontura'] = symptoms.dizziness;
+    sint['Diarreia'] = symptoms.diarrhea;
+    sint['Vomito'] = symptoms.vomit;
+    sint['Dor de Garganta'] = symptoms.throatProblems;
+    sint['Contato com Infectado'] = symptoms.exposed;
+    sint['Cansaço'] = symptoms.tiredness;
+    sint['Nausea'] = symptoms.nausea;
+    sint.forEach((key, value) {
+      value == true ? selectedChoices.add('${key}') : '';
+    });
   }
 
   Map<String,bool> sint = {
@@ -70,6 +97,8 @@ class _AppBody extends State<AppBody> {
 
   @override
   Widget build(BuildContext context) {
+   // Request.getSymptoms();
+    //Request.postSymptoms(symptoms);
     List<Widget> _widgetOptions = <Widget>[
       profile(context),
       choiceChips(context),
@@ -121,6 +150,13 @@ class _AppBody extends State<AppBody> {
         SizedBox(height: 20,),
         Text(
             selectedChoices.join(" , ")
+        ),
+        RaisedButton(
+          child: Text('Pegar'),
+          onPressed: () {
+            getSymptoms();
+            sintomasToMap();
+          },
         )
       ],
     );
