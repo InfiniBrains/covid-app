@@ -74,6 +74,7 @@ class _AppBody extends State<AppBody> {
     sint.forEach((key, value) {
       value == true ? selectedChoices.add('${key}') : '';
     });
+    setState(() {});
   }
 
   Map<String,bool> sint = {
