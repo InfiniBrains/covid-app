@@ -17,7 +17,7 @@ class Request{
     form["name"] = credentials.name;
     form["zip"] = credentials.zip;
 
-    var uri = "https://covid-the.herokuapp.com/users";
+    var uri = "https://covid-the.herokuapp.com/auth/local/register";
     var res = await http.Client().post(Uri.encodeFull(uri), body: form);
     print(res.body);
 
@@ -28,7 +28,7 @@ class Request{
     form["identifier"] = cpf;
     form["password"] = cpf;
 
-    var uri = "https://covid-the.herokuapp.com/users";
+    var uri = "https://covid-the.herokuapp.com/auth/local";
     var res = await http.Client().post(Uri.encodeFull(uri), body: form);
     print(cpf.toString());
     print(res.body);
@@ -37,6 +37,8 @@ class Request{
       Map<String, dynamic> map = jsonDecode(res.body);
       _jwt = map["jwt"];
       return _jwt;
+    }else{
+      return null;
     }
   }
   static Future<String> postSymptoms(SymptomsForm symptomsForm) async {

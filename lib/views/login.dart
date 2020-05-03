@@ -50,7 +50,7 @@ class _HomeMaterialState extends State<HomeMaterial> {
                                       Request.login(_user.cpf);
                                       form.save();
                                       _showDialog(context);
-                                      Navigator.pushNamed(context, Routes.appBody);
+                                      // Navigator.pushNamed(context, Routes.appBody);
                                     }
                                   },
                                   child: Text('Entrar')
