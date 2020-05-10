@@ -13,7 +13,13 @@ class AppBody extends StatefulWidget {
 class _AppBody extends State<AppBody> {
   bool isSelected = false;
 
-  // List for choice chips
+  @override
+  void initState() {
+    getSymptoms().then((value){
+      print('Async done');
+    });
+    super.initState();
+  }
 
   List<String> selectedChoices = List();
 
@@ -98,8 +104,6 @@ class _AppBody extends State<AppBody> {
 
   @override
   Widget build(BuildContext context) {
-   // Request.getSymptoms();
-    //Request.postSymptoms(symptoms);
     List<Widget> _widgetOptions = <Widget>[
       profile(context),
       choiceChips(context),
@@ -152,13 +156,6 @@ class _AppBody extends State<AppBody> {
         Text(
             selectedChoices.join(" , ")
         ),
-        RaisedButton(
-          child: Text('Pegar'),
-          onPressed: () {
-            getSymptoms();
-            sintomasToMap();
-          },
-        )
       ],
     );
   }
@@ -176,6 +173,14 @@ class _AppBody extends State<AppBody> {
         Wrap(
         children: _buildChoiceList(),
           ),
+      FlatButton(
+        child: Text(
+          'Salvar Sintomas'
+        ),
+        onPressed: () {
+          Request.postSymptoms(symptoms);
+        },
+      )
     ]);
   }
   _buildChoiceList() {

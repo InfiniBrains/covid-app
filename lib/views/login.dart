@@ -47,8 +47,8 @@ class _HomeMaterialState extends State<HomeMaterial> {
                                   onPressed: () {
                                     final form = _formKey.currentState;
                                     if (form.validate()) {
-                                      login();
                                       form.save();
+                                      login();
                                       _showDialog(context);
                                       // Navigator.pushNamed(context, Routes.appBody);
                                     }
@@ -81,7 +81,9 @@ class _HomeMaterialState extends State<HomeMaterial> {
   Future login() async {
     var jwt =await Request.login(_user.cpf);
     if(jwt != null){
-      Navigator.pushNamed(context, Routes.appBody);
+      setState(() {
+        Navigator.pushNamed(context, Routes.appBody);
+      });
     }
   }
 }
